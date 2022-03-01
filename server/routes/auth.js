@@ -51,17 +51,26 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       console.error(err);
       return next(err);
     }
+    if (!user) {
+      return res.json({ result: 'No User Exists' });
+    }
 
-    return req.login(user, (loginErr) => {
+    req.login(user, (loginErr) => {
       if (loginErr) {
         console.error(loginErr);
         return next(loginErr);
       }
+      console.log(req.user);
 
       //  console.log('req.user : ' + JSON.stringify(user));
       return res.status(200).json(user);
     });
   })(req, res, next);
+});
+
+router.get('/user', (req, res) => {
+  console.log(req.user);
+  res.send(req.user);
 });
 
 router.get('/logout', isLoggedIn, (req, res) => {
