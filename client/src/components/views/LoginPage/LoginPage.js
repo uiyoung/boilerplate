@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -51,6 +52,7 @@ function LoginPage() {
 
   return (
     <>
+      <Link to="/">home</Link>
       <h3>LoginPage</h3>
       <h4>{data ? data.username : ''}</h4>
       <input type="text" value={email} onChange={onChangeEmail} />
